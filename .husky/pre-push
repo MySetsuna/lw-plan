@@ -31,6 +31,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # 如果你要部署在 https://MySetsuna.github.io/hot-soup
-# git push -f git@github.com:MySetsuna/hot-soup.git main:gh-pages
+git push -f git@github.com:MySetsuna/lw-plan.git main:gh-pages
 
 cd -
