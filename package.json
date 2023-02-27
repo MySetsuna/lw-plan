@@ -24,6 +24,8 @@
 		"@mui/icons-material": "^5.11.0",
 		"@mui/material": "^5.11.7",
 		"loadsh": "^0.0.4",
+		"mobx": "^6.8.0",
+		"mobx-react-lite": "^3.4.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router": "^6.8.1",
