@@ -1,2 +1,3 @@
 import TreeList from './TreeList';
-export default TreeList;
+import type { TreeNodeType } from './TreeList';
+export { TreeList as default, TreeNodeType };
