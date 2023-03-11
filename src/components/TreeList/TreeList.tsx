@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import TreeNode from '../TreeNode';
-export function generateTree() {
+export function generateTree () {
 	const tree = {
 		0: {
 			id: 0,
@@ -43,10 +43,10 @@ const TreeList = observer(() => {
 	const nodes = generateTree();
 	const store = useLocalObservable(() => ({
 		nodes,
-		getNodeById(id: number) {
+		getNodeById (id: number) {
 			return this.filteredNodes[id];
 		},
-		get filteredNodes() {
+		get filteredNodes () {
 			const { nodes } = this;
 			return nodes;
 		}

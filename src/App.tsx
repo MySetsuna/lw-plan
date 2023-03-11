@@ -2,12 +2,13 @@ import { Outlet } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function App () {
 	return (
 		<div className="app">
 			<div className="links">
 				<NavLink to={'examples'}>examples</NavLink>
 				<NavLink to={'treelist'}>treelist</NavLink>
+				<NavLink to={'newtreelist'}>new - tree - list</NavLink>
 			</div>
 			<Outlet />
 		</div>
