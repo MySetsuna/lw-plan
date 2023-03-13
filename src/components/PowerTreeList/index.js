@@ -1,3 +1,8 @@
 import listStore, { ColumnStore, FilterStore } from './domain/stores';
-
-export { ColumnStore, FilterStore, listStore as DefaultListStore };
+import PowerTreeList from './PowerTreeList';
+export {
+	ColumnStore,
+	FilterStore,
+	listStore as DefaultListStore,
+	PowerTreeList as default
+};

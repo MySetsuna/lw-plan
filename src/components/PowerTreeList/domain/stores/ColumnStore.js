@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 /**
  *
@@ -50,14 +50,14 @@ class ColumnStore {
 	currentColumns = [];
 
 	/**
-	 * @type {{id:string,sort:()=>void}[]}
+	 * @type {{[key]:string,[value]:()=>void}}
 	 */
-	columnSorter = [];
+	columnSorter = {};
 
 	/**
-	 * @type {{id:string,sortValue:0|1|-1}[]}
+	 * @type {{[key]:string,[value]:0|1|-1}}
 	 */
-	columnSortValues = [];
+	columnSortValues = {};
 
 	/**
 	 * @type {{label:string,group?:string,groupKey?:string,element?s:React.ReactElement}[]}
@@ -72,18 +72,22 @@ class ColumnStore {
 	 *  defualtWidth: number | (columnid:string)=>number
 	 * }} props
 	 */
-	constructor (props) {
-		const { defualtWidth, columns, widthCfg = {}, currentColumns, columnSorter, columnSortValues } = props;
-		makeAutoObservable(this, {
-			columnTitles: observable.array,
-			columns: observable.array
-		});
+	constructor (props = {}) {
+		const {
+			defualtWidth,
+			columns = [],
+			widthCfg = {},
+			currentColumns,
+			columnSorter,
+			columnSortValues
+		} = props;
+		makeAutoObservable(this);
 		this.columns = columns;
 		this.widthCfg = new Proxy(widthCfg, widthCfgHandler(defualtWidth));
 		this.currentColumns = currentColumns;
-		if (defualtWidth)	this.defualtWidth = defualtWidth;
-		if (columnSorter)	this.columnSorter = columnSorter;
-		if (columnSortValues)	this.columnSortValues = columnSortValues;
+		if (defualtWidth) this.defualtWidth = defualtWidth;
+		if (columnSorter) this.columnSorter = columnSorter;
+		if (columnSortValues) this.columnSortValues = columnSortValues;
 	}
 
 	/**
@@ -99,7 +103,10 @@ class ColumnStore {
 		) {
 			this.currentColumns = currentColumns;
 		} else {
-			console.warn('invaild params,currentColumns require string array', currentColumns);
+			console.warn(
+				'invaild params,currentColumns require string array',
+				currentColumns
+			);
 		}
 	}
 
@@ -123,13 +130,15 @@ class ColumnStore {
 			this.columns.splice(this.columns.findIndex(options?.id), 1, options);
 			break;
 		case 'remove':
-			this.columns.splice(
-				this.columns.findIndex(options?.id ?? options),
-				1
-			);
+			this.columns.splice(this.columns.findIndex(options?.id ?? options), 1);
 			break;
 		case 'rename':
-			this.columns.find(options?.id)?.name = options.name;
+			this.columns.map((item) => {
+				if (item.id === options?.id) {
+					return { ...item, name: options.name };
+				}
+				return item;
+			});
 			break;
 		default:
 			break;
@@ -146,7 +155,7 @@ class ColumnStore {
 	 */
 	setWidthCfg ({ widthCfg, key, value }) {
 		if (typeof widthCfg === 'object') {
-			if (Object.values(widthCfg).every((item) => (typeof item === 'number'))) {
+			if (Object.values(widthCfg).every((item) => typeof item === 'number')) {
 				this.widthCfg = new Proxy(widthCfg, widthCfgHandler(this.defualtWidth));
 			}
 		}
@@ -156,8 +165,25 @@ class ColumnStore {
 	}
 
 	setDefualtWidth (defualtWidth) {
-		this.widthCfg = new Proxy({ ...this.widthCfg }, widthCfgHandler(defualtWidth));
+		this.widthCfg = new Proxy(
+			{ ...this.widthCfg },
+			widthCfgHandler(defualtWidth)
+		);
 		this.defualtWidth = defualtWidth;
+	}
+
+	setColumnSortValues ({ columnSortValues, key, value }) {
+		if (
+			typeof columnSortValues === 'object' &&
+			Object.values(columnSortValues).every(
+				(element) => typeof element === 'number'
+			)
+		) {
+			this.columnSortValues = columnSortValues;
+		}
+		if (key && typeof value === 'number') {
+			this.columnSortValues = value;
+		}
 	}
 }
 export default ColumnStore;

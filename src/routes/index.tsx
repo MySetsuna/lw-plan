@@ -8,7 +8,7 @@ import Point from '../example/Point';
 import Welcome from '@/components/Welcome';
 import Examples from '@/components/Examples';
 import TreeList from '@/components/TreeList';
-
+import PowerTreeList from '@/components/PowerTreeList';
 const appRoutes = [
 	{
 		path: '/',
@@ -24,6 +24,10 @@ const appRoutes = [
 			{
 				path: 'treelist',
 				element: <TreeList />
+			},
+			{
+				path: 'newtreelist',
+				element: <PowerTreeList>8888</PowerTreeList>
 			},
 			{
 				path: 'examples',
