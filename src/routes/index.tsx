@@ -9,6 +9,7 @@ import Welcome from '@/components/Welcome';
 import Examples from '@/components/Examples';
 import TreeList from '@/components/TreeList';
 import PowerTreeList from '@/components/PowerTreeList';
+import { DraggableTitleSorter } from '@/components/PowerTreeList/components/ColumnSetting/components/DraggableTitle';
 const appRoutes = [
 	{
 		path: '/',
@@ -27,7 +28,11 @@ const appRoutes = [
 			},
 			{
 				path: 'newtreelist',
-				element: <PowerTreeList>8888</PowerTreeList>
+				element: (
+					<PowerTreeList>
+						<DraggableTitleSorter />
+					</PowerTreeList>
+				)
 			},
 			{
 				path: 'examples',
