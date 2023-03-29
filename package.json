@@ -3,8 +3,10 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
+	"main": "electron/app.ts",
 	"scripts": {
 		"dev": "vite",
+		"electron:dev": "electron .",
 		"dev:gh": "vite --mode gh",
 		"build:gh": "tsc && vite build --mode gh",
 		"build": "tsc && vite build ",
@@ -30,6 +32,7 @@
 		"react-dnd": "^16.0.1",
 		"react-dnd-html5-backend": "^16.0.1",
 		"react-dom": "^18.2.0",
+		"react-motion": "^0.5.2",
 		"react-router": "^6.8.1",
 		"react-router-dom": "^6.8.1"
 	},
@@ -48,6 +51,7 @@
 		"@vitest/coverage-c8": "^0.28.4",
 		"electron": "^23.2.0",
 		"electron-is-dev": "^2.0.0",
+		"electron-vite": "^1.0.21",
 		"eslint": "^8.0.1",
 		"eslint-plugin-react": "^7.32.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
