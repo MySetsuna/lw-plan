@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TreeRow from '../TreeRow';
-import { observer } from 'mobx-react-lite';
 import useTreeListStore from '@/hooks/useTreeListStroe/useTreeListStore';
 
 const TreeNode = (props) => {
 	const { id, level = 1 } = props;
 	const [isExpand, setIsExpand] = React.useState(false);
-	const { store } = useTreeListStore();
-	const node = store.getNodeById(id);
+	const { getNodeById } = useTreeListStore();
+	const node = getNodeById(id);
 	const { childIds } = node;
 
 	return (
@@ -45,4 +44,4 @@ TreeNode.propTypes = {
 	level: PropTypes.number
 };
 
-export default observer(TreeNode);
+export default TreeNode;

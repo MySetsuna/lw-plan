@@ -32,6 +32,7 @@ module.exports = {
 		semi: ['error', 'always'],
 		'prefer-template': 'error',
 		'@typescript-eslint/no-unused-vars': [2],
+		'no-mixed-spaces-and-tabs': [0],
 		'no-unused-vars': [0],
 		'no-tabs': 0
 	}

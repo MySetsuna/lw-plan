@@ -1,5 +1,4 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
 import TreeNode from '../TreeNode';
 import TreeListProvider from '@/provider/TreeListProvider';
 
@@ -15,7 +14,7 @@ export interface TreeStore {
 	getNodeById(id: number): TreeNodeType;
 }
 
-const TreeList = observer(() => {
+const TreeList = () => {
 	return (
 		<TreeListProvider>
 			<div
@@ -27,6 +26,6 @@ const TreeList = observer(() => {
 			</div>
 		</TreeListProvider>
 	);
-});
+};
 
 export { TreeList as default };

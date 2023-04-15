@@ -1,7 +1,6 @@
 import { TreeListContext } from '@/hooks/useTreeListStroe/useTreeListStore';
-import { useLocalObservable } from 'mobx-react-lite';
-import React from 'react';
-export function generateTree () {
+import React, { useMemo, useReducer } from 'react';
+export function generateTree() {
 	const tree = {
 		0: {
 			id: 0,
@@ -24,20 +23,66 @@ export function generateTree () {
 
 	return tree;
 }
+
+export type NodesType = {
+	[key: number]: {
+		id: number;
+		parentId: number | null;
+		type: number;
+		childIds: number[];
+	};
+};
 const TreeListProvider = ({ children }: { children: React.ReactNode }) => {
-	const nodes = generateTree();
-	const store = useLocalObservable(() => ({
-		nodes,
-		getNodeById (id: number) {
-			return this.filteredNodes[id];
-		},
-		get filteredNodes () {
-			const { nodes } = this;
-			return nodes;
+	const nodes: NodesType = generateTree();
+	const reducer = (
+		state: { nodes: NodesType },
+		action: {
+			type: string;
+			payload: {
+				[key: string | symbol | number]: any;
+				id: number;
+				nodes: {
+					id: number;
+					parentId: number | null;
+					type: number;
+					childIds: number[];
+				};
+			};
 		}
-	}));
+	) => {
+		let tempNodes: NodesType;
+		switch (action.type) {
+		// case 'getNodeById':
+		// 	return state.nodes[action.payload.id];
+		// case 'filteredNodes':
+		// 	return state.nodes;
+		case 'addNodes':
+			return {
+				nodes: {
+					...state.nodes,
+					[Object.keys(state.nodes).length]: action.payload.nodes
+				}
+			};
+		case 'removeNodes':
+			tempNodes = state.nodes;
+			Reflect.deleteProperty(tempNodes, action.payload.id);
+			return {
+				nodes: tempNodes
+			};
+		default:
+			return state;
+		}
+	};
+	const [state, dispatch] = useReducer(reducer, { nodes });
+	const contextValue = useMemo(
+		() => ({
+			state,
+			dispatch
+		}),
+		[state, dispatch]
+	);
 	return (
-		<TreeListContext.Provider value={store}>
+		<TreeListContext.Provider value={contextValue}>
 			{children}
 		</TreeListContext.Provider>
 	);

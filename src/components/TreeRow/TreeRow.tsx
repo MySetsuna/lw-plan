@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import type { TreeNodeType } from '../TreeList';
-import { observer } from 'mobx-react-lite';
 
 type TreeRowProps = {
 	node: TreeNodeType;
@@ -53,4 +52,4 @@ TreeRow.propTypes = {
 	level: PropTypes.number
 };
 
-export default observer(TreeRow);
+export default TreeRow;

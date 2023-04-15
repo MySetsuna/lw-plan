@@ -8,8 +8,7 @@ import Point from '../example/Point';
 import Welcome from '@/components/Welcome';
 import Examples from '@/components/Examples';
 import TreeList from '@/components/TreeList';
-import PowerTreeList from '@/components/PowerTreeList';
-import { DraggableTitleSorter } from '@/components/PowerTreeList/components/ColumnSetting/components/DraggableTitle';
+import ColumnSetting from '@/components/UsefulTable/components/ColumnSetting';
 const appRoutes = [
 	{
 		path: '/',
@@ -28,11 +27,7 @@ const appRoutes = [
 			},
 			{
 				path: 'newtreelist',
-				element: (
-					<PowerTreeList>
-						<DraggableTitleSorter />
-					</PowerTreeList>
-				)
+				element: <ColumnSetting />
 			},
 			{
 				path: 'examples',
