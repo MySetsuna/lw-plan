@@ -90,6 +90,7 @@ const ColumnSetting = ({ onChange }) => {
 				ref={stortyRef}
 				onChange={handleSorterChange}
 				value={ITEMS}
+				itemStyle={{ border: 'solid 1px red', display: 'none' }}
 			/>
 		</div>
 	);

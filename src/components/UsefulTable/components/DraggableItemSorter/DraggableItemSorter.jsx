@@ -9,7 +9,7 @@ import React, {
 import PropTypes from 'prop-types';
 import DraggableItem from './DraggableItem';
 import { useDrop } from 'react-dnd';
-const style = {
+const defualtStyle = {
 	width: 'auto'
 };
 const ItemTypes = {
@@ -17,7 +17,17 @@ const ItemTypes = {
 };
 
 const DraggableItemSorter = forwardRef(
-	({ onChange, value, showSelfHistoyTool, historyToolRenderer }, ref) => {
+	(
+		{
+			onChange,
+			value,
+			showSelfHistoyTool,
+			historyToolRenderer,
+			itemStyle,
+			style
+		},
+		ref
+	) => {
 		const [items, setItems] = useState(value);
 		const [historyItem, sethistoryItem] = useState([value]);
 		const [currentIndex, setCurrentIndex] = useState(0);
@@ -163,7 +173,7 @@ const DraggableItemSorter = forwardRef(
 		return (
 			<div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
 				{showSelfHistoyTool && selfHistoyTool}
-				<div ref={drop} style={style}>
+				<div ref={drop} style={style ?? defualtStyle}>
 					{items &&
 						items
 							.filter((item) => {
@@ -172,6 +182,7 @@ const DraggableItemSorter = forwardRef(
 							})
 							.map((item) => (
 								<DraggableItem
+									style={itemStyle}
 									key={item.id}
 									id={`${item?.id}`}
 									item={item.item}
@@ -216,7 +227,9 @@ DraggableItemSorter.propTypes = {
 	onChange: PropTypes.func,
 	value: PropTypes.array,
 	showSelfHistoyTool: PropTypes.bool,
-	historyToolRenderer: PropTypes.func
+	historyToolRenderer: PropTypes.func,
+	itemStyle: PropTypes.object,
+	style: PropTypes.object
 };
 DraggableItemSorter.displayName = 'DraggableItemSorter';
 

@@ -9,6 +9,7 @@ import Welcome from '@/components/Welcome';
 import Examples from '@/components/Examples';
 import TreeList from '@/components/TreeList';
 import ColumnSetting from '@/components/UsefulTable/components/ColumnSetting';
+import TreeTable from '@/components/UsefulTable/components/TreeTable';
 const appRoutes = [
 	{
 		path: '/',
@@ -26,8 +27,12 @@ const appRoutes = [
 				element: <TreeList />
 			},
 			{
-				path: 'newtreelist',
+				path: 'sorter',
 				element: <ColumnSetting />
+			},
+			{
+				path: 'treetable',
+				element: <TreeTable />
 			},
 			{
 				path: 'examples',

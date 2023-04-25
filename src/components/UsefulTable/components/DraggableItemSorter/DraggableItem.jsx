@@ -9,7 +9,7 @@ const ItemTypes = {
 /**
  * @type {React.CSSProperties}
  */
-const style = {
+const defualtStyle = {
 	border: '1px dashed gray',
 	padding: '0.5rem 1rem',
 	marginBottom: '.5rem',
@@ -26,7 +26,8 @@ const DraggableItem = ({
 	findItem,
 	removeItem,
 	deleteIcon,
-	onDragEnd
+	onDragEnd,
+	style
 }) => {
 	const originalIndex = findItem(id).index;
 	const [{ isDragging }, drag] = useDrag(
@@ -51,7 +52,7 @@ const DraggableItem = ({
 	const [, drop] = useDrop(
 		() => ({
 			accept: ItemTypes.CARD,
-			hover({ id: draggedId }) {
+			hover ({ id: draggedId }) {
 				if (draggedId !== id) {
 					const { index: overIndex } = findItem(id);
 					if (overIndex > -1) {
@@ -67,8 +68,12 @@ const DraggableItem = ({
 		removeItem(id);
 	}, [id, removeItem]);
 	const opacity = isDragging ? 0 : 1;
+	const itemStyle = style ?? defualtStyle;
 	return (
-		<div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
+		<div
+			ref={(node) => drag(drop(node))}
+			style={{ ...itemStyle, opacity, display: 'flex' }}
+		>
 			{item}
 			<div onClick={remove} style={{ cursor: 'pointer' }}>
 				{deleteIcon}
