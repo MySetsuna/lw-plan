@@ -23,6 +23,7 @@
 		"@emotion/react": "^11.10.5",
 		"@emotion/styled": "^11.10.5",
 		"@fontsource/roboto": "^4.5.8",
+		"@jackjiang18/hello-wasm": "^0.1.1",
 		"@mui/icons-material": "^5.11.0",
 		"@mui/material": "^5.11.7",
 		"loadsh": "^0.0.4",
@@ -64,6 +65,8 @@
 		"sort-by": "^1.2.0",
 		"typescript": "^4.9.5",
 		"vite": "^4.1.0",
+		"vite-plugin-top-level-await": "^1.3.1",
+		"vite-plugin-wasm": "^3.2.2",
 		"vitest": "^0.28.4"
 	},
 	"husky": {

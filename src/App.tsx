@@ -2,11 +2,15 @@ import { Outlet } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
+import { greet } from '@jackjiang18/hello-wasm';
 
 function App () {
+	const handleClick = () => {
+		greet('Life with Plan');
+	};
 	return (
 		<div className="app">
-			<div className="app-header">
+			<div className="app-header" onClick={handleClick}>
 				<Header />
 			</div>
 			<div className="app-body">
